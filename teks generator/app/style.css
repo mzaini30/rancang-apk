@@ -1,0 +1,11 @@
+* {
+  word-wrap: break-word;
+}
+
+body {
+  padding-top: 70px;
+}
+
+.dark {
+  cursor: pointer;
+}
