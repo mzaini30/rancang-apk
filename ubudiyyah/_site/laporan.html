@@ -7,6 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="vendor/zen/style.css">
 	<script type="text/javascript" src="vendor/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="vendor/dexie/dexie.js"></script>
 	<script type="text/javascript" src="vendor/zen/app.js"></script>
 </head>
 <body>
@@ -17,11 +18,135 @@
 			</div>
 		</div>
 	</div>
-	<div class="container"><h4>Shalat tepat waktu</h4>
-<div class="checkbox"><label><input type="checkbox" name="" id=""> Subuh</label></div>
-<div class="checkbox"><label><input type="checkbox" name="" id=""> Dzuhur</label></div>
-<div class="checkbox"><label><input type="checkbox" name="" id=""> Ashar</label></div>
-<div class="checkbox"><label><input type="checkbox" name="" id=""> Maghrib</label></div>
-<div class="checkbox"><label><input type="checkbox" name="" id=""> Isya</label></div></div>
+	<div class="container"><style type="text/css">
+	h4 {
+		margin-top: 20px;
+	}
+
+	h3,
+	h4:first-child {
+		margin-top: 0;
+	}
+
+	.sekarang {
+		font-style: italic;
+	}
+</style>
+
+<h3 class="sekarang"></h3>
+<form action="" class="form-laporan">
+	<h4>Shalat tepat waktu</h4>
+	<div class="checkbox"><label><input type="checkbox" name="" id="" class="cek tepat_waktu_subuh"> Subuh</label></div>
+	<div class="checkbox"><label><input type="checkbox" name="" id="" class="cek tepat_waktu_dzuhur"> Dzuhur</label></div>
+	<div class="checkbox"><label><input type="checkbox" name="" id="" class="cek tepat_waktu_ashar"> Ashar</label></div>
+	<div class="checkbox"><label><input type="checkbox" name="" id="" class="cek tepat_waktu_maghrib"> Maghrib</label></div>
+	<div class="checkbox"><label><input type="checkbox" name="" id="" class="cek tepat_waktu_isya"> Isya</label></div>
+	<h4>Shalat berjamaah</h4>
+	<div class="checkbox"><label><input type="checkbox" name="" id="" class="cek berjamaah_pertama"> Waktu pertama</label></div>
+	<div class="checkbox"><label><input type="checkbox" name="" id="" class="cek berjamaah_kedua"> Waktu kedua</label></div>
+	<div class="checkbox"><label><input type="checkbox" name="" id="" class="cek berjamaah_ketiga"> Waktu ketiga</label></div>
+	<h4>Shalat rawatib</h4>
+	<div class="checkbox"><label><input type="checkbox" name="" id="" class="cek rawatib_pertama"> Rawatib pertama</label></div>
+	<div class="checkbox"><label><input type="checkbox" name="" id="" class="cek rawatib_kedua"> Rawatib kedua</label></div>
+	<div class="checkbox"><label><input type="checkbox" name="" id="" class="cek rawatib_ketiga"> Rawatib ketiga</label></div>
+	<h4>Shalat nafilah</h4>
+	<div class="checkbox"><label><input type="checkbox" name="" id="" class="cek nafilah"> Nafilah</label></div>
+
+	<input type="submit" value="Oke" class="sembunyi submit-laporan">
+</form>
+
+<div class="navbar navbar-default navbar-fixed-bottom">
+	<div class="container">
+		<table class="table table-bordered">
+			<tbody>
+				<tr>
+					<td>
+						<div class="btn btn-success oke-laporan">Oke</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<script type="text/javascript">
+	sekarang = `${tanggal} ${nama_bulan[bulan]} ${tahun}`
+	bulan_sekarang = `${nama_bulan[bulan]} ${tahun}`
+	$('.sekarang').html(sekarang)
+	$('.cek').attr('data-sekarang', sekarang)
+
+	$('.oke-laporan').click(() => $('.submit-laporan').click())
+
+	database = []
+	ubudiyyah.data.each(function(x){
+		database.push(x)
+	})
+
+	!localStorage.tanggal ? localStorage.setItem('tanggal', JSON.stringify([])) : ''
+
+	data_tanggal = JSON.parse(localStorage.tanggal)
+
+	if (data_tanggal.indexOf(sekarang) != -1){
+		ubudiyyah.data.where({
+			tanggal: sekarang
+		}).each(x => {
+			$('.tepat_waktu_subuh').attr('checked', x.tepat_waktu_subuh)
+			$('.tepat_waktu_dzuhur').attr('checked', x.tepat_waktu_dzuhur)
+			$('.tepat_waktu_ashar').attr('checked', x.tepat_waktu_ashar)
+			$('.tepat_waktu_maghrib').attr('checked', x.tepat_waktu_maghrib)
+			$('.tepat_waktu_isya').attr('checked', x.tepat_waktu_isya)
+			$('.berjamaah_pertama').attr('checked', x.berjamaah_pertama)
+			$('.berjamaah_kedua').attr('checked', x.berjamaah_kedua)
+			$('.berjamaah_ketiga').attr('checked', x.berjamaah_ketiga)
+			$('.rawatib_pertama').attr('checked', x.rawatib_pertama)
+			$('.rawatib_kedua').attr('checked', x.rawatib_kedua)
+			$('.rawatib_ketiga').attr('checked', x.rawatib_ketiga)
+			$('.nafilah').attr('checked', x.nafilah)
+		})
+	}
+
+	$('.form-laporan').on('submit', x => {
+		x.preventDefault()
+		if (data_tanggal.indexOf(sekarang) != -1){
+			ubudiyyah.data.where({
+				tanggal: sekarang
+			}).modify({
+				tepat_waktu_subuh: $('.tepat_waktu_subuh').is(':checked') ? true : false,
+				tepat_waktu_dzuhur: $('.tepat_waktu_dzuhur').is(':checked') ? true : false,
+				tepat_waktu_ashar: $('.tepat_waktu_ashar').is(':checked') ? true : false,
+				tepat_waktu_maghrib: $('.tepat_waktu_maghrib').is(':checked') ? true : false,
+				tepat_waktu_isya: $('.tepat_waktu_isya').is(':checked') ? true : false,
+				berjamaah_pertama: $('.berjamaah_pertama').is(':checked') ? true : false,
+				berjamaah_kedua: $('.berjamaah_kedua').is(':checked') ? true : false,
+				berjamaah_ketiga: $('.berjamaah_ketiga').is(':checked') ? true : false,
+				rawatib_pertama: $('.rawatib_pertama').is(':checked') ? true : false,
+				rawatib_kedua: $('.rawatib_kedua').is(':checked') ? true : false,
+				rawatib_ketiga: $('.rawatib_ketiga').is(':checked') ? true : false,
+				nafilah: $('.nafilah').is(':checked') ? true : false
+			}).then(() => location.href = 'index.html')
+		} else {
+			ubudiyyah.data.add({
+				tepat_waktu_subuh: $('.tepat_waktu_subuh').is(':checked') ? true : false,
+				tepat_waktu_dzuhur: $('.tepat_waktu_dzuhur').is(':checked') ? true : false,
+				tepat_waktu_ashar: $('.tepat_waktu_ashar').is(':checked') ? true : false,
+				tepat_waktu_maghrib: $('.tepat_waktu_maghrib').is(':checked') ? true : false,
+				tepat_waktu_isya: $('.tepat_waktu_isya').is(':checked') ? true : false,
+				berjamaah_pertama: $('.berjamaah_pertama').is(':checked') ? true : false,
+				berjamaah_kedua: $('.berjamaah_kedua').is(':checked') ? true : false,
+				berjamaah_ketiga: $('.berjamaah_ketiga').is(':checked') ? true : false,
+				rawatib_pertama: $('.rawatib_pertama').is(':checked') ? true : false,
+				rawatib_kedua: $('.rawatib_kedua').is(':checked') ? true : false,
+				rawatib_ketiga: $('.rawatib_ketiga').is(':checked') ? true : false,
+				nafilah: $('.nafilah').is(':checked') ? true : false,
+				tanggal: sekarang,
+				bulan: bulan_sekarang
+			}).then(() => {
+				data_tanggal.push(sekarang)
+				localStorage.setItem('tanggal', JSON.stringify(data_tanggal))
+				location.href = 'index.html'
+			})
+		}
+	})
+</script></div>
 </body>
 </html>
