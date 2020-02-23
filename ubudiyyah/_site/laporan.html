@@ -23,7 +23,6 @@
 		margin-top: 20px;
 	}
 
-	h3,
 	h4:first-child {
 		margin-top: 0;
 	}
@@ -72,6 +71,9 @@
 <script type="text/javascript">
 	sekarang = `${tanggal} ${nama_bulan[bulan]} ${tahun}`
 	bulan_sekarang = `${nama_bulan[bulan]} ${tahun}`
+
+	// bulan_sekarang = 'Maret 2020'
+
 	$('.sekarang').html(sekarang)
 	$('.cek').attr('data-sekarang', sekarang)
 
@@ -83,6 +85,7 @@
 	})
 
 	!localStorage.tanggal ? localStorage.setItem('tanggal', JSON.stringify([])) : ''
+	!localStorage.bulan ? localStorage.setItem('bulan', JSON.stringify([])) : ''
 
 	data_tanggal = JSON.parse(localStorage.tanggal)
 
@@ -107,6 +110,13 @@
 
 	$('.form-laporan').on('submit', x => {
 		x.preventDefault()
+
+		data_bulan = JSON.parse(localStorage.bulan)
+		if (data_bulan.indexOf(bulan_sekarang) == -1){
+			data_bulan.push(bulan_sekarang)
+			localStorage.setItem('bulan', JSON.stringify(data_bulan))
+		}
+		
 		if (data_tanggal.indexOf(sekarang) != -1){
 			ubudiyyah.data.where({
 				tanggal: sekarang

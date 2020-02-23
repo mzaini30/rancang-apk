@@ -2,6 +2,8 @@
 layout: default
 ---
 
+<div class="isi"></div>
+
 <div class="navbar navbar-default navbar-fixed-bottom">
 	<div class="container">
 		<table class="table table-bordered">
@@ -15,3 +17,29 @@ layout: default
 		</table>
 	</div>
 </div>
+
+<script type="text/javascript">
+	semua_bulan = JSON.parse(localStorage.bulan)
+	isi = ''
+	for (x of semua_bulan){
+		isi += `
+			<h3>${x}</h3>
+			<table class='table table-bordered'>
+				<thead>
+					<tr>
+						<th>Judul</th>
+						<th>Kuantitas</th>
+						<th>Keterangan</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Shalat tepat waktu</td>
+						<td></td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>`
+	}
+	$('.isi').html(isi)
+</script>
