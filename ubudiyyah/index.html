@@ -19,27 +19,81 @@ layout: default
 </div>
 
 <script type="text/javascript">
-	semua_bulan = JSON.parse(localStorage.bulan)
+	semua_bulan = JSON.parse(localStorage.bulan).reverse()
 	isi = ''
-	for (x of semua_bulan){
-		isi += `
-			<h3>${x}</h3>
-			<table class='table table-bordered'>
-				<thead>
-					<tr>
-						<th>Judul</th>
-						<th>Kuantitas</th>
-						<th>Keterangan</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>Shalat tepat waktu</td>
-						<td></td>
-						<td></td>
-					</tr>
-				</tbody>
-			</table>`
-	}
-	$('.isi').html(isi)
+	semua_data = []
+	ubudiyyah.data.each(x => semua_data.push(x)).then(() => {
+		for (x of semua_bulan){
+			shalat_tepat_waktu = 0
+			shalat_berjamaah = 0
+			shalat_rawatib = 0
+			shalat_nafilah = 0
+			keterangan_shalat_tepat_waktu = ''
+			keterangan_shalat_berjamaah = ''
+			keterangan_shalat_rawatib = ''
+			keterangan_shalat_nafilah = ''
+			for (n in semua_data){
+				if (semua_data[n].bulan == x){
+					semua_data[n].tepat_waktu_subuh == true ? shalat_tepat_waktu += 1 : ''
+					semua_data[n].tepat_waktu_dzuhur == true ? shalat_tepat_waktu += 1 : ''
+					semua_data[n].tepat_waktu_ashar == true ? shalat_tepat_waktu += 1 : ''
+					semua_data[n].tepat_waktu_maghrib == true ? shalat_tepat_waktu += 1 : ''
+					semua_data[n].tepat_waktu_isya == true ? shalat_tepat_waktu += 1 : ''
+					semua_data[n].berjamaah_pertama == true ? shalat_berjamaah += 1 : ''
+					semua_data[n].berjamaah_kedua == true ? shalat_berjamaah += 1 : ''
+					semua_data[n].berjamaah_ketiga == true ? shalat_berjamaah += 1 : ''
+					semua_data[n].rawatib_pertama == true ? shalat_rawatib += 1 : ''
+					semua_data[n].rawatib_kedua == true ? shalat_rawatib += 1 : ''
+					semua_data[n].rawatib_ketiga == true ? shalat_rawatib += 1 : ''
+					semua_data[n].nafilah == true ? shalat_nafilah += 1 : ''
+				}
+			}
+			shalat_tepat_waktu <= 45 ? keterangan_shalat_tepat_waktu = 'belum baik' : ''
+			shalat_tepat_waktu >= 46 && shalat_tepat_waktu <= 95 ? keterangan_shalat_tepat_waktu = 'kurang baik' : ''
+			shalat_tepat_waktu >= 96 ? keterangan_shalat_tepat_waktu = 'baik' : ''
+			shalat_berjamaah <= 27 ? keterangan_shalat_berjamaah = 'belum baik' : ''
+			shalat_berjamaah >= 28 && shalat_berjamaah <= 54 ? keterangan_shalat_berjamaah = 'kurang baik' : ''
+			shalat_berjamaah >= 55 ? keterangan_shalat_berjamaah = 'baik' : ''
+			shalat_rawatib <= 27 ? keterangan_shalat_rawatib = 'belum baik' : ''
+			shalat_rawatib >= 28 && shalat_rawatib <= 54 ? keterangan_shalat_rawatib = 'kurang baik' : ''
+			shalat_rawatib >= 55 ? keterangan_shalat_rawatib = 'baik' : ''
+			shalat_nafilah <= 9 ? keterangan_shalat_nafilah = 'belum baik' : ''
+			shalat_nafilah >= 10 && shalat_nafilah <= 19 ? keterangan_shalat_nafilah = 'kurang baik' : ''
+			shalat_nafilah >= 20 ? keterangan_shalat_nafilah = 'baik' : ''
+			isi += `
+				<h3>${x}</h3>
+				<table class='table table-bordered'>
+					<thead>
+						<tr>
+							<th>Judul</th>
+							<th>Kuantitas</th>
+							<th>Keterangan</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Shalat tepat waktu</td>
+							<td>${shalat_tepat_waktu}</td>
+							<td>${keterangan_shalat_tepat_waktu}</td>
+						</tr>
+						<tr>
+							<td>Shalat berjamaah</td>
+							<td>${shalat_berjamaah}</td>
+							<td>${keterangan_shalat_berjamaah}</td>
+						</tr>
+						<tr>
+							<td>Shalat rawatib</td>
+							<td>${shalat_rawatib}</td>
+							<td>${keterangan_shalat_rawatib}</td>
+						</tr>
+						<tr>
+							<td>Shalat nafilah</td>
+							<td>${shalat_nafilah}</td>
+							<td>${keterangan_shalat_nafilah}</td>
+						</tr>
+					</tbody>
+				</table>`
+		}
+		$('.isi').html(isi)
+	})
 </script>
