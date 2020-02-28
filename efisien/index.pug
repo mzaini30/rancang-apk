@@ -1,0 +1,28 @@
+ul.nav.nav-tabs
+  li.active: a.tombol-beranda(href="#efektif-beranda" data-toggle="tab"): .glyphicon.glyphicon-home
+  li: a(href="#efektif-isi" data-toggle="tab"): .glyphicon.glyphicon-plus
+  li: a.tombol-selesai(href="#efektif-selesai" data-toggle="tab"): .glyphicon.glyphicon-ok
+
+.tab-content
+  .tab-pane.active#efektif-beranda
+    table.table.table-bordered
+      thead
+        tr
+          th(colspan=3) Quest
+      tbody.isi-quest
+  .tab-pane#efektif-isi
+    .pesan
+    .form-group
+      label Nama quest
+      input.form-control.questnya
+    .form-group
+      .btn.btn-success.mulai Mulai
+  .tab-pane#efektif-selesai
+    table.table.table-bordered
+      thead
+        tr
+          th Quest
+          th Waktu
+      tbody.quest-selesai
+
+script(src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js")
