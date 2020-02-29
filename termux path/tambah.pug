@@ -1,0 +1,37 @@
+extends layout/default.pug
+
+block isi
+  form.form-tambah
+    .form-group
+      label Judul
+      input.form-control.judul(required)
+    ul.nav.nav-tabs
+      li.active: a(href="#beranda" data-toggle="tab"): .glyphicon.glyphicon-home
+      li: a(href="#olah" data-toggle="tab").ke-olah: .glyphicon.glyphicon-ok
+    .tab-content
+      .tab-pane.active#beranda
+        .form-group
+          label Kode
+          textarea(rows=10).kode.form-control
+      .tab-pane#olah
+        .form-group
+          label Hasil
+          textarea(rows=10 readonly).hasil.form-control
+  
+block menu
+  td: .btn.btn-default.simpan Simpan
+  
+  //
+    cd /data/data/com.termux/files/usr/bin
+    touch Haha
+    chmod +x Haha
+    echo > Haha
+    echo "Aku kamu \"satu\" \$2" >> Haha
+    echo "Makan" >> Haha
+
+block app
+  script.
+    $(".ke-olah").click(() => {
+      teks = `
+    cd /data/data/com.termux/files/usr/bin`
+    })

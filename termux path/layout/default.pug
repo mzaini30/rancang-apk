@@ -1,0 +1,33 @@
+mixin css(x)
+  link(rel="stylesheet" href=`vendor/${x}`)
+mixin js(x)
+  script(src=`vendor/${x}`)
+
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1, user-scalable=no")
+    +css("bootstrap/css/bootstrap.min.css")
+    +css("zen/style.css")
+    title Termux Path
+  body
+    .navbar.navbar-default.navbar-fixed-top
+      .container
+        .navbar-header
+          a.navbar-brand(href="index.html") Termux Path
+    .container
+      block isi
+      
+    block footer
+      .navbar.navbar-default.navbar-fixed-bottom
+        .container
+          table.table.table-bordered
+            tr
+              block menu
+              
+    +js("jquery/jquery.min.js")
+    +js("bootstrap/js/bootstrap.min.js")
+    +js("dexie/dexie.js")
+    +js("zen/app.js")
+    block app

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="vendor/zen/style.css"/>
+    <title>Termux Path</title>
+  </head>
+  <body>
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header"><a class="navbar-brand" href="index.html">Termux Path</a></div>
+      </div>
+    </div>
+    <div class="container">
+      <form class="form-tambah">
+        <div class="form-group">
+          <label>Judul</label>
+          <input class="form-control judul" required>
+        </div>
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#beranda" data-toggle="tab">
+              <div class="glyphicon glyphicon-home"></div></a></li>
+          <li><a class="ke-olah" href="#olah" data-toggle="tab">
+              <div class="glyphicon glyphicon-ok"></div></a></li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="beranda">
+            <div class="form-group">
+              <label>Kode</label>
+              <textarea class="kode form-control" rows="10"></textarea>
+            </div>
+          </div>
+          <div class="tab-pane" id="olah">
+            <div class="form-group">
+              <label>Hasil</label>
+              <textarea class="hasil form-control" rows="10" readonly></textarea>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="navbar navbar-default navbar-fixed-bottom">
+      <div class="container">
+        <table class="table table-bordered">
+          <tr>
+            <td>
+              <div class="btn btn-default simpan">Simpan</div>
+            </td>
+            <!--
+            cd /data/data/com.termux/files/usr/bin
+            touch Haha
+            chmod +x Haha
+            echo > Haha
+            echo "Aku kamu \"satu\" \$2" >> Haha
+            echo "Makan" >> Haha
+            
+            -->
+          </tr>
+        </table>
+      </div>
+    </div>
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="vendor/dexie/dexie.js"></script>
+    <script src="vendor/zen/app.js"></script>
+    <script>
+      $(".ke-olah").click(() => {
+        teks = `
+      cd /data/data/com.termux/files/usr/bin`
+      })
+    </script>
+  </body>
+</html>

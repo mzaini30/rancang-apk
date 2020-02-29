@@ -1,0 +1,30 @@
+* {
+  word-wrap: break-word;
+}
+
+body {
+  padding-top: 70px;
+  padding-bottom: 50px;
+}
+
+img {
+  max-width: 100%;
+}
+
+.navbar-fixed-bottom .table {
+  margin-bottom: 0;
+}
+
+.navbar-fixed-bottom .btn {
+  width: 100%;
+}
+
+.navbar-fixed-bottom .table,
+.navbar-fixed-bottom tr,
+.navbar-fixed-bottom td {
+  border: none !important;
+}
+
+.tab-content {
+  padding-top: 10px;
+}
