@@ -1,0 +1,57 @@
+- judul = "Membentuk Kebiasaan"
+- paket = "membentukkebiasaan"
+
+mixin css(x)
+  link(rel="stylesheet" href=`vendor/${x}`)
+mixin js(x)
+  script(src=`vendor/${x}`)
+mixin icon(x)
+  div(class=`glyphicon glyphicon-${x}`)
+mixin kisah(judul, txt)
+  .panel.panel-default
+    .panel-heading(id=`heading-${txt}`)
+      h4.panel-title
+        a.judul-accordion(data-toggle="collapse" data-parent="#accordion" href=`#collapse-${txt}`) #{judul}
+    div(id=`collapse-${txt}`).panel-collapse.collapse
+      .panel-body
+        .isinya
+          block
+
+doctype html
+html
+  head
+    title #{judul}
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1, user-scalable=no")
+    +css("bootstrap/css/bootstrap.min.css")
+    +css("zen/style.css")
+  body
+    .navbar.navbar-default.navbar-fixed-top
+      .container
+        .navbar-header
+          .navbar-toggle.collapsed(data-toggle="collapse" data-target="#isi-menu")
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          .navbar-brand #{judul}
+        .collapse.navbar-collapse#isi-menu
+          ul.nav.navbar-nav
+            li: a(href=`https://play.google.com/store/apps/details?id=com.mzaini30.${paket}`) Kasih bintang 5
+            li: a(href="https://play.google.com/store/apps/dev?id=5401138465689796048") Aplikasi lainnya
+    .container
+      .panel-group#accordion
+        +kisah("Prolog", "prolog"): include notes/prolog.md
+        +kisah("Semua bermula dari niat", "niat"): include notes/niat.md
+        +kisah("Banyakin pengulangan", "ulang"): include notes/ulang.md
+        +kisah("Terus semangat", "semangat"): include notes/semangat.md
+        +kisah("Epilog", "epilog"): include notes/epilog.md
+    .navbar.navbar-default.navbar-fixed-bottom
+      .container
+        table.table.table-bordered
+          tbody
+            tr
+              td
+                a.btn.btn-default.bungkus(href="index.html") Tutup accordion
+    +js("jquery/jquery.min.js")
+    +js("bootstrap/js/bootstrap.min.js")
+    +js("zen/app.js")

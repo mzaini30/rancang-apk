@@ -1,0 +1,1 @@
+$(".html").html(marked($(".markdown").val()))

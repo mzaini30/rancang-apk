@@ -1,0 +1,1 @@
+Akhirnya selesai juga ebook tentang cara membentuk kebiasaan. Kalau kamu suka dengan ebook ini dan jngin orang lain juga memilikinya, jangan lupa ya kabari temanmu yang lain untuk mendownload ebook ini di Play Store. Semoga kita semua mendapatkan pencerahan setelah membaca ebook ini. Yap, demi Indonesia yang lebih baik lagi.

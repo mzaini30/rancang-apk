@@ -1,0 +1,19 @@
+mixin tabel(nama, alamat)
+  tr
+    td #{nama}
+    td #{alamat}
+
+doctype html
+html
+  head
+    title Contoh Pug
+  body
+    table
+      thead
+        tr
+          th Nama
+          th Alamat
+      tbody
+        +tabel("Zen", "Samarinda")
+        +tabel("Wiryo", "Lampung")
+        +tabel("Musa", "Padang")

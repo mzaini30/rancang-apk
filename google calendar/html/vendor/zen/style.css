@@ -1,0 +1,16 @@
+* {
+  word-wrap: break-word;
+}
+
+body {
+  padding-top: 0px;
+}
+
+img {
+  max-width: 100%;
+  border: 1px dashed black;
+}
+
+.sembunyi {
+  display: none;
+}

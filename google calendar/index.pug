@@ -1,0 +1,23 @@
+mixin css(x)
+  link(rel="stylesheet" href=`vendor/${x}`)
+mixin js(x)
+  script(src=`vendor/${x}`)
+mixin icon(x)
+  div(class=`glyphicon glyphicon-${x}`)
+
+doctype html
+html
+  head
+    title Google Calendar
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1, user-scalable=no")
+    +css("bootstrap/css/bootstrap.min.css")
+    +css("zen/style.css")
+  body
+    .container
+      textarea.markdown.sembunyi
+        include include/panduan.md
+      .html
+    +js("jquery/jquery.min.js")
+    +js("marked/marked-w3.js")
+    +js("zen/app.js")

@@ -1,0 +1,3 @@
+"Semua bermula dari niat". Yap, itu quote yang sering kita denger. Ya benar sih. Semuanya bermula dari niat. Kalau kita punya niat, maka kita punya pandangan tentang apa yang akan kita lakukan.
+
+Misalnya seperti yang akan kita lakukan ini yaitu membentuk kebiasaan. Maka, alangkah lebih baik jika kita niatkan dulu supaya kita nantinya terbiasa dengan kebiasaan-kebiasaan yang baik. Bukannya itu yang mau kita lakukan kan?
