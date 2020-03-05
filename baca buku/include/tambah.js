@@ -1,0 +1,1 @@
+$(".tambahkan").click(() => $(".submit-tambah").click())
