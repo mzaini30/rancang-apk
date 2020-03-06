@@ -1,5 +1,5 @@
 script
-  :babel(presets=["es2015"])
-    angka_semesta = [1,1,2,3,5,8,13,21]
-    keindahan = angka_semesta.map(x => x ** 2)
+  :babel(presets=["es2015", "es2016"])
+    var angka_semesta = [1,1,2,3,5,8,13,21]
+    var keindahan = angka_semesta.map(x => x ** 2)
     console.log(keindahan)

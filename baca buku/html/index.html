@@ -1,0 +1,410 @@
+<!DOCTYPE html><html><head><title>Baca Buku</title><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css"/><style>* {
+  word-wrap: break-word;
+}
+body {
+  padding-top: 70px;
+  padding-bottom: 50px;
+}
+.navbar-fixed-bottom .btn {
+  width: 100%;
+}
+.navbar-fixed-bottom .table {
+  margin-bottom: 0;
+}
+.navbar-fixed-bottom .table,
+.navbar-fixed-bottom .table tr,
+.navbar-fixed-bottom .table td {
+  border: none !important;
+}
+.tab-pane {
+  padding-top: 15px;
+}
+.sembunyi {
+  display: none;
+}
+.progress {
+  margin-bottom: 0;
+}
+</style></head><body><div class="navbar navbar-default navbar-fixed-top"><div class="container"><div class="navbar-header"><div class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu"><div class="icon-bar"></div><div class="icon-bar"></div><div class="icon-bar"></div></div><a class="navbar-brand" href="index.html">Baca Buku</a></div><div class="collapse navbar-collapse" id="menu"><ul class="nav navbar-nav"><li><a href="https://play.google.com/store/apps/details?id=com.mzaini30.bacabuku">Kasih bintang 5 </a></li><li><a href="https://play.google.com/store/apps/dev?id=5401138465689796048">Aplikasi lainnya</a></li></ul></div></div></div><div class="container"><ul class="nav nav-tabs"><li class="active"><a href="#bulan" data-toggle="tab">Bulan</a></li><li><a href="#tahun" data-toggle="tab">Tahun</a></li><li><a href="#genre" data-toggle="tab">Genre</a></li><li><a href="#semua" data-toggle="tab">Semua</a></li></ul><div class="tab-content"><div class="tab-pane active" id="bulan"><table class="table table-bordered"><thead><tr> <th>Bulan </th><th>Banyak</th><th>Progress </th></tr></thead><tbody class="isi-bulan"></tbody></table></div><div class="tab-pane" id="tahun"><table class="table table-bordered"><thead><tr> <th>Tahun </th><th>Banyak</th><th>Progress </th></tr></thead><tbody class="isi-tahun"></tbody></table></div><div class="tab-pane" id="genre"><table class="table table-bordered"><thead><tr> <th>Genre</th><th>Banyak</th><th>Progress </th></tr></thead><tbody class="isi-genre"></tbody></table></div><div class="tab-pane" id="semua"><table class="table table-bordered"><thead><tr> <th>Judul</th><th>Tanggal</th><th>Banyak</th><th></th></tr></thead><tbody class="isi-semua"></tbody></table></div></div></div><div class="navbar navbar-default navbar-fixed-bottom"><div class="container"><table class="table table-bordered"><tbody><tr><td> <a class="btn btn-default" href="tambah.html"><div class="glyphicon glyphicon-plus"></div></a></td></tr></tbody></table></div></div><script src="vendor/jquery/jquery.min.js"></script><script src="vendor/bootstrap/js/bootstrap.min.js"></script><script src="vendor/dexie/dexie.js"></script><script src="vendor/vconsole/vconsole.min.js"></script><script>"use strict";
+
+// new VConsole()
+
+var sekarang = new Date();
+var tanggal = sekarang.getDate();
+var tahun = sekarang.getFullYear();
+var bulan = sekarang.getMonth();
+
+// tahun = 2025
+
+var list_bulan = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+
+var bulan_tahun = list_bulan[bulan] + " " + tahun;
+var tanggal_bulan_tahun = tanggal + " " + list_bulan[bulan] + " " + tahun;
+
+var database = new Dexie("database baca buku");
+database.version(1).stores({
+  data: "++id, judul, penulis, halaman, genre, tahun, bulan_tahun, tanggal_bulan_tahun"
+});
+
+!localStorage.bulan ? localStorage.setItem("bulan", "[]") : "";
+!localStorage.tahun ? localStorage.setItem("tahun", "[]") : "";
+!localStorage.genre ? localStorage.setItem("genre", "[]") : "";
+
+$(".navbar-nav a").click(function () {
+  return $(".navbar-toggle").click();
+});"use strict";
+
+var olah_data = function olah_data() {
+  var isi_semua = "";
+  var data_semua = [];
+  database.data.reverse().each(function (x) {
+    data_semua.push({
+      bulan: "" + x.bulan_tahun,
+      tahun: "" + x.tahun,
+      genre: "" + x.genre,
+      banyak: "" + x.halaman
+    });
+
+    isi_semua += "\n      <tr>\n        <td>\n          <strong>" + x.judul + "</strong><br>\n          <em>" + x.penulis + "</em>\n        </td>\n        <td>" + x.tanggal_bulan_tahun + "</td>\n        <td>" + Number(x.halaman).toLocaleString("id") + "</td>\n        <td>\n          <div data-id=" + x.id + " class=\"hapus btn btn-danger\">&times;</div>\n        </td>\n      </tr>";
+  }).then(function () {
+    var data_tahun = [];
+    var tahun_tertinggi = 0;
+    var semua_tahun = JSON.parse(localStorage.tahun);
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
+
+    try {
+      for (var _iterator = semua_tahun[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        var x = _step.value;
+
+        var banyak = 0;
+        var _iteratorNormalCompletion10 = true;
+        var _didIteratorError10 = false;
+        var _iteratorError10 = undefined;
+
+        try {
+          for (var _iterator10 = data_semua[Symbol.iterator](), _step10; !(_iteratorNormalCompletion10 = (_step10 = _iterator10.next()).done); _iteratorNormalCompletion10 = true) {
+            var y = _step10.value;
+
+            y.tahun == x ? banyak += Number(y.banyak) : "";
+          }
+        } catch (err) {
+          _didIteratorError10 = true;
+          _iteratorError10 = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion10 && _iterator10.return) {
+              _iterator10.return();
+            }
+          } finally {
+            if (_didIteratorError10) {
+              throw _iteratorError10;
+            }
+          }
+        }
+
+        data_tahun.push({
+          tahun: "" + x,
+          banyak: "" + banyak
+        });
+      }
+    } catch (err) {
+      _didIteratorError = true;
+      _iteratorError = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion && _iterator.return) {
+          _iterator.return();
+        }
+      } finally {
+        if (_didIteratorError) {
+          throw _iteratorError;
+        }
+      }
+    }
+
+    var _iteratorNormalCompletion2 = true;
+    var _didIteratorError2 = false;
+    var _iteratorError2 = undefined;
+
+    try {
+      for (var _iterator2 = data_tahun[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+        var z = _step2.value;
+
+        Number(z.banyak) > tahun_tertinggi ? tahun_tertinggi = z.banyak : "";
+      }
+    } catch (err) {
+      _didIteratorError2 = true;
+      _iteratorError2 = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion2 && _iterator2.return) {
+          _iterator2.return();
+        }
+      } finally {
+        if (_didIteratorError2) {
+          throw _iteratorError2;
+        }
+      }
+    }
+
+    var isi_tahun = "";
+    data_tahun.reverse();
+    var _iteratorNormalCompletion3 = true;
+    var _didIteratorError3 = false;
+    var _iteratorError3 = undefined;
+
+    try {
+      for (var _iterator3 = data_tahun[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+        var q = _step3.value;
+
+        isi_tahun += "\n        <tr>\n          <td>" + q.tahun + "</td>\n          <td>" + Number(q.banyak).toLocaleString("id") + "</td>\n          <td>\n            <div class=\"progress\">\n              <div class=\"progress-bar progress-bar-default\" style=\"width: " + 100 * Number(q.banyak) / tahun_tertinggi + "%\"></div>\n            </div>\n          </td>\n        </tr>";
+      }
+    } catch (err) {
+      _didIteratorError3 = true;
+      _iteratorError3 = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion3 && _iterator3.return) {
+          _iterator3.return();
+        }
+      } finally {
+        if (_didIteratorError3) {
+          throw _iteratorError3;
+        }
+      }
+    }
+
+    $(".isi-tahun").html(isi_tahun);
+
+    var data_bulan = [];
+    var bulan_tertinggi = 0;
+    var semua_bulan = JSON.parse(localStorage.bulan);
+    var _iteratorNormalCompletion4 = true;
+    var _didIteratorError4 = false;
+    var _iteratorError4 = undefined;
+
+    try {
+      for (var _iterator4 = semua_bulan[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+        var x = _step4.value;
+
+        var banyak = 0;
+        var _iteratorNormalCompletion11 = true;
+        var _didIteratorError11 = false;
+        var _iteratorError11 = undefined;
+
+        try {
+          for (var _iterator11 = data_semua[Symbol.iterator](), _step11; !(_iteratorNormalCompletion11 = (_step11 = _iterator11.next()).done); _iteratorNormalCompletion11 = true) {
+            var y = _step11.value;
+
+            y.bulan == x ? banyak += Number(y.banyak) : "";
+          }
+        } catch (err) {
+          _didIteratorError11 = true;
+          _iteratorError11 = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion11 && _iterator11.return) {
+              _iterator11.return();
+            }
+          } finally {
+            if (_didIteratorError11) {
+              throw _iteratorError11;
+            }
+          }
+        }
+
+        data_bulan.push({
+          bulan: "" + x,
+          banyak: "" + banyak
+        });
+      }
+    } catch (err) {
+      _didIteratorError4 = true;
+      _iteratorError4 = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion4 && _iterator4.return) {
+          _iterator4.return();
+        }
+      } finally {
+        if (_didIteratorError4) {
+          throw _iteratorError4;
+        }
+      }
+    }
+
+    var _iteratorNormalCompletion5 = true;
+    var _didIteratorError5 = false;
+    var _iteratorError5 = undefined;
+
+    try {
+      for (var _iterator5 = data_bulan[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
+        var z = _step5.value;
+
+        Number(z.banyak) > bulan_tertinggi ? bulan_tertinggi = z.banyak : "";
+      }
+    } catch (err) {
+      _didIteratorError5 = true;
+      _iteratorError5 = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion5 && _iterator5.return) {
+          _iterator5.return();
+        }
+      } finally {
+        if (_didIteratorError5) {
+          throw _iteratorError5;
+        }
+      }
+    }
+
+    var isi_bulan = "";
+    data_bulan.reverse();
+    var _iteratorNormalCompletion6 = true;
+    var _didIteratorError6 = false;
+    var _iteratorError6 = undefined;
+
+    try {
+      for (var _iterator6 = data_bulan[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
+        var q = _step6.value;
+
+        isi_bulan += "\n        <tr>\n          <td>" + q.bulan + "</td>\n          <td>" + Number(q.banyak).toLocaleString("id") + "</td>\n          <td>\n            <div class=\"progress\">\n              <div class=\"progress-bar progress-bar-default\" style=\"width: " + 100 * Number(q.banyak) / bulan_tertinggi + "%\"></div>\n            </div>\n          </td>\n        </tr>";
+      }
+    } catch (err) {
+      _didIteratorError6 = true;
+      _iteratorError6 = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion6 && _iterator6.return) {
+          _iterator6.return();
+        }
+      } finally {
+        if (_didIteratorError6) {
+          throw _iteratorError6;
+        }
+      }
+    }
+
+    $(".isi-bulan").html(isi_bulan);
+
+    var data_genre = [];
+    var genre_tertinggi = 0;
+    var semua_genre = JSON.parse(localStorage.genre).sort();
+    var _iteratorNormalCompletion7 = true;
+    var _didIteratorError7 = false;
+    var _iteratorError7 = undefined;
+
+    try {
+      for (var _iterator7 = semua_genre[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
+        var x = _step7.value;
+
+        var banyak = 0;
+        var _iteratorNormalCompletion12 = true;
+        var _didIteratorError12 = false;
+        var _iteratorError12 = undefined;
+
+        try {
+          for (var _iterator12 = data_semua[Symbol.iterator](), _step12; !(_iteratorNormalCompletion12 = (_step12 = _iterator12.next()).done); _iteratorNormalCompletion12 = true) {
+            var y = _step12.value;
+
+            y.genre == x ? banyak += Number(y.banyak) : "";
+          }
+        } catch (err) {
+          _didIteratorError12 = true;
+          _iteratorError12 = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion12 && _iterator12.return) {
+              _iterator12.return();
+            }
+          } finally {
+            if (_didIteratorError12) {
+              throw _iteratorError12;
+            }
+          }
+        }
+
+        data_genre.push({
+          genre: "" + x,
+          banyak: "" + banyak
+        });
+      }
+    } catch (err) {
+      _didIteratorError7 = true;
+      _iteratorError7 = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion7 && _iterator7.return) {
+          _iterator7.return();
+        }
+      } finally {
+        if (_didIteratorError7) {
+          throw _iteratorError7;
+        }
+      }
+    }
+
+    var _iteratorNormalCompletion8 = true;
+    var _didIteratorError8 = false;
+    var _iteratorError8 = undefined;
+
+    try {
+      for (var _iterator8 = data_genre[Symbol.iterator](), _step8; !(_iteratorNormalCompletion8 = (_step8 = _iterator8.next()).done); _iteratorNormalCompletion8 = true) {
+        var z = _step8.value;
+
+        Number(z.banyak) > genre_tertinggi ? genre_tertinggi = z.banyak : "";
+      }
+    } catch (err) {
+      _didIteratorError8 = true;
+      _iteratorError8 = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion8 && _iterator8.return) {
+          _iterator8.return();
+        }
+      } finally {
+        if (_didIteratorError8) {
+          throw _iteratorError8;
+        }
+      }
+    }
+
+    var isi_genre = "";
+    var _iteratorNormalCompletion9 = true;
+    var _didIteratorError9 = false;
+    var _iteratorError9 = undefined;
+
+    try {
+      for (var _iterator9 = data_genre[Symbol.iterator](), _step9; !(_iteratorNormalCompletion9 = (_step9 = _iterator9.next()).done); _iteratorNormalCompletion9 = true) {
+        var q = _step9.value;
+
+        isi_genre += "\n        <tr>\n          <td>" + q.genre + "</td>\n          <td>" + Number(q.banyak).toLocaleString("id") + "</td>\n          <td>\n            <div class=\"progress\">\n              <div class=\"progress-bar progress-bar-default\" style=\"width: " + 100 * Number(q.banyak) / genre_tertinggi + "%\"></div>\n            </div>\n          </td>\n        </tr>";
+      }
+    } catch (err) {
+      _didIteratorError9 = true;
+      _iteratorError9 = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion9 && _iterator9.return) {
+          _iterator9.return();
+        }
+      } finally {
+        if (_didIteratorError9) {
+          throw _iteratorError9;
+        }
+      }
+    }
+
+    $(".isi-genre").html(isi_genre);
+
+    $(".isi-semua").html(isi_semua);
+  });
+
+  $(document).on("click", ".hapus", function () {
+    localStorage.setItem("id", $(this).data("id"));
+    location.href = "hapus.html";
+  });
+};
+olah_data();</script></body></html>

@@ -1,0 +1,11 @@
+extends layout/default.pug
+
+block isi
+  p Hapus kah?
+  p: .btn.btn-danger.hapus-aja Iya
+  
+block footer
+  | &nbsp;
+  
+block app
+  include:babel(presets=["es2015"]) include/hapus.js

@@ -1,0 +1,49 @@
+extends layout/default.pug
+
+block isi
+  ul.nav.nav-tabs
+    li.active: a(href="#bulan" data-toggle="tab") Bulan
+    li: a(href="#tahun" data-toggle="tab") Tahun
+    li: a(href="#genre" data-toggle="tab") Genre
+    li: a(href="#semua" data-toggle="tab") Semua
+  .tab-content
+    .tab-pane.active#bulan
+      table.table.table-bordered
+        thead
+          tr 
+            th Bulan 
+            th Banyak
+            th Progress 
+        tbody.isi-bulan
+    .tab-pane#tahun
+      table.table.table-bordered
+        thead
+          tr 
+            th Tahun 
+            th Banyak
+            th Progress 
+        tbody.isi-tahun
+    .tab-pane#genre
+      table.table.table-bordered
+        thead
+          tr 
+            th Genre
+            th Banyak
+            th Progress 
+        tbody.isi-genre
+    .tab-pane#semua
+      table.table.table-bordered
+        thead
+          tr 
+            th Judul
+            th Tanggal
+            th Banyak
+            th
+        tbody.isi-semua
+
+block menu
+  td 
+    a.btn.btn-default(href="tambah.html"): +icon("plus")
+    
+block app
+  include:babel(presets=["es2015"]) include/index.js

@@ -1,0 +1,26 @@
+extends layout/default.pug
+
+block isi
+  form.form-tambah
+    .form-group
+      label Judul
+      input.form-control.judul(required) 
+    .form-group
+      label Penulis
+      input.form-control.penulis(required)
+    .form-group
+      label Jumlah halaman
+      input.form-control.halaman(required type="tel") 
+    .form-group
+      label Genre
+      input.form-control.genre(required)
+    .form-group
+      .pilihan-genre
+    input.sembunyi.submit-tambah(type="submit")
+
+block menu
+  td 
+    a.btn.btn-success.ke-tambah: +icon("ok")
+    
+block app
+  include:babel(presets=["es2015"]) include/tambah.js

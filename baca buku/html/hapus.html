@@ -1,0 +1,63 @@
+<!DOCTYPE html><html><head><title>Baca Buku</title><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css"/><style>* {
+  word-wrap: break-word;
+}
+body {
+  padding-top: 70px;
+  padding-bottom: 50px;
+}
+.navbar-fixed-bottom .btn {
+  width: 100%;
+}
+.navbar-fixed-bottom .table {
+  margin-bottom: 0;
+}
+.navbar-fixed-bottom .table,
+.navbar-fixed-bottom .table tr,
+.navbar-fixed-bottom .table td {
+  border: none !important;
+}
+.tab-pane {
+  padding-top: 15px;
+}
+.sembunyi {
+  display: none;
+}
+.progress {
+  margin-bottom: 0;
+}
+</style></head><body><div class="navbar navbar-default navbar-fixed-top"><div class="container"><div class="navbar-header"><div class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu"><div class="icon-bar"></div><div class="icon-bar"></div><div class="icon-bar"></div></div><a class="navbar-brand" href="index.html">Baca Buku</a></div><div class="collapse navbar-collapse" id="menu"><ul class="nav navbar-nav"><li><a href="https://play.google.com/store/apps/details?id=com.mzaini30.bacabuku">Kasih bintang 5 </a></li><li><a href="https://play.google.com/store/apps/dev?id=5401138465689796048">Aplikasi lainnya</a></li></ul></div></div></div><div class="container"><p>Hapus kah?</p><p><div class="btn btn-danger hapus-aja">Iya</div></p></div>&nbsp;<script src="vendor/jquery/jquery.min.js"></script><script src="vendor/bootstrap/js/bootstrap.min.js"></script><script src="vendor/dexie/dexie.js"></script><script src="vendor/vconsole/vconsole.min.js"></script><script>"use strict";
+
+// new VConsole()
+
+var sekarang = new Date();
+var tanggal = sekarang.getDate();
+var tahun = sekarang.getFullYear();
+var bulan = sekarang.getMonth();
+
+// tahun = 2025
+
+var list_bulan = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+
+var bulan_tahun = list_bulan[bulan] + " " + tahun;
+var tanggal_bulan_tahun = tanggal + " " + list_bulan[bulan] + " " + tahun;
+
+var database = new Dexie("database baca buku");
+database.version(1).stores({
+  data: "++id, judul, penulis, halaman, genre, tahun, bulan_tahun, tanggal_bulan_tahun"
+});
+
+!localStorage.bulan ? localStorage.setItem("bulan", "[]") : "";
+!localStorage.tahun ? localStorage.setItem("tahun", "[]") : "";
+!localStorage.genre ? localStorage.setItem("genre", "[]") : "";
+
+$(".navbar-nav a").click(function () {
+  return $(".navbar-toggle").click();
+});"use strict";
+
+$(".hapus-aja").click(function () {
+  database.data.where({
+    id: Number(localStorage.id)
+  }).delete().then(function () {
+    return location.href = "index.html";
+  });
+});</script></body></html>

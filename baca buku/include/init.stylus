@@ -1,0 +1,25 @@
+*
+  word-wrap break-word
+  
+body
+  padding-top 70px
+  padding-bottom 50px
+  
+.navbar-fixed-bottom
+  .btn 
+    width 100%
+  .table 
+    margin-bottom 0 
+    &
+    tr 
+    td 
+      border none !important
+      
+.tab-pane
+  padding-top 15px
+  
+.sembunyi
+  display none
+  
+.progress
+  margin-bottom 0

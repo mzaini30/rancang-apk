@@ -1,0 +1,135 @@
+<!DOCTYPE html><html><head><title>Baca Buku</title><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css"/><style>* {
+  word-wrap: break-word;
+}
+body {
+  padding-top: 70px;
+  padding-bottom: 50px;
+}
+.navbar-fixed-bottom .btn {
+  width: 100%;
+}
+.navbar-fixed-bottom .table {
+  margin-bottom: 0;
+}
+.navbar-fixed-bottom .table,
+.navbar-fixed-bottom .table tr,
+.navbar-fixed-bottom .table td {
+  border: none !important;
+}
+.tab-pane {
+  padding-top: 15px;
+}
+.sembunyi {
+  display: none;
+}
+.progress {
+  margin-bottom: 0;
+}
+</style></head><body><div class="navbar navbar-default navbar-fixed-top"><div class="container"><div class="navbar-header"><div class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu"><div class="icon-bar"></div><div class="icon-bar"></div><div class="icon-bar"></div></div><a class="navbar-brand" href="index.html">Baca Buku</a></div><div class="collapse navbar-collapse" id="menu"><ul class="nav navbar-nav"><li><a href="https://play.google.com/store/apps/details?id=com.mzaini30.bacabuku">Kasih bintang 5 </a></li><li><a href="https://play.google.com/store/apps/dev?id=5401138465689796048">Aplikasi lainnya</a></li></ul></div></div></div><div class="container"><form class="form-tambah"><div class="form-group"><label>Judul</label><input class="form-control judul" required></div><div class="form-group"><label>Penulis</label><input class="form-control penulis" required></div><div class="form-group"><label>Jumlah halaman</label><input class="form-control halaman" required type="tel"></div><div class="form-group"><label>Genre</label><input class="form-control genre" required></div><div class="form-group"><div class="pilihan-genre"></div></div><input class="sembunyi submit-tambah" type="submit"></form></div><div class="navbar navbar-default navbar-fixed-bottom"><div class="container"><table class="table table-bordered"><tbody><tr><td> <a class="btn btn-success ke-tambah"><div class="glyphicon glyphicon-ok"></div></a></td></tr></tbody></table></div></div><script src="vendor/jquery/jquery.min.js"></script><script src="vendor/bootstrap/js/bootstrap.min.js"></script><script src="vendor/dexie/dexie.js"></script><script src="vendor/vconsole/vconsole.min.js"></script><script>"use strict";
+
+// new VConsole()
+
+var sekarang = new Date();
+var tanggal = sekarang.getDate();
+var tahun = sekarang.getFullYear();
+var bulan = sekarang.getMonth();
+
+// tahun = 2025
+
+var list_bulan = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+
+var bulan_tahun = list_bulan[bulan] + " " + tahun;
+var tanggal_bulan_tahun = tanggal + " " + list_bulan[bulan] + " " + tahun;
+
+var database = new Dexie("database baca buku");
+database.version(1).stores({
+  data: "++id, judul, penulis, halaman, genre, tahun, bulan_tahun, tanggal_bulan_tahun"
+});
+
+!localStorage.bulan ? localStorage.setItem("bulan", "[]") : "";
+!localStorage.tahun ? localStorage.setItem("tahun", "[]") : "";
+!localStorage.genre ? localStorage.setItem("genre", "[]") : "";
+
+$(".navbar-nav a").click(function () {
+  return $(".navbar-toggle").click();
+});"use strict";
+
+$(".ke-tambah").click(function () {
+  return $(".submit-tambah").click();
+});
+
+/*
+ database.version(1).stores({
+  data: "++id, judul, penulis, halaman, genre, tahun, bulan_tahun, tanggal_bulan_tahun"
+})
+*/
+
+var list_genre = JSON.parse(localStorage.genre);
+var pilihan_genre = "";
+var _iteratorNormalCompletion = true;
+var _didIteratorError = false;
+var _iteratorError = undefined;
+
+try {
+  for (var _iterator = list_genre[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+    var x = _step.value;
+
+    pilihan_genre += "\n    <div class=\"pilihan-genre-item btn btn-default\">" + x + "</div>";
+  }
+} catch (err) {
+  _didIteratorError = true;
+  _iteratorError = err;
+} finally {
+  try {
+    if (!_iteratorNormalCompletion && _iterator.return) {
+      _iterator.return();
+    }
+  } finally {
+    if (_didIteratorError) {
+      throw _iteratorError;
+    }
+  }
+}
+
+$(".pilihan-genre").html(pilihan_genre);
+
+$(document).on("click", ".pilihan-genre-item", function () {
+  $(".genre").val($(this).html());
+});
+
+$(".form-tambah").on("submit", function (x) {
+  x.preventDefault();
+  var data_judul = $(".judul").val();
+  var data_penulis = $(".penulis").val();
+  var data_halaman = $(".halaman").val();
+  var data_genre = $(".genre").val();
+
+  var ambil_bulan = JSON.parse(localStorage.bulan);
+  var ambil_tahun = JSON.parse(localStorage.tahun);
+  var ambil_genre = JSON.parse(localStorage.genre);
+
+  if ($.inArray(bulan_tahun, ambil_bulan) == -1) {
+    ambil_bulan.push(bulan_tahun);
+    localStorage.setItem("bulan", JSON.stringify(ambil_bulan));
+  }
+  if ($.inArray(tahun, ambil_tahun) == -1) {
+    ambil_tahun.push(tahun);
+    localStorage.setItem("tahun", JSON.stringify(ambil_tahun));
+  }
+  if ($.inArray(data_genre, ambil_genre) == -1) {
+    ambil_genre.push(data_genre);
+    localStorage.setItem("genre", JSON.stringify(ambil_genre));
+  }
+
+  database.data.add({
+    judul: data_judul,
+    penulis: data_penulis,
+    halaman: data_halaman,
+    genre: data_genre,
+    tahun: tahun,
+    bulan_tahun: bulan_tahun,
+    tanggal_bulan_tahun: tanggal_bulan_tahun
+  }).then(function () {
+    return location.href = "index.html";
+  });
+});</script></body></html>
