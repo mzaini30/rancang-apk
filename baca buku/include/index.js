@@ -118,6 +118,10 @@ var olah_data = () => {
     $(".isi-genre").html(isi_genre)
     
     $(".isi-semua").html(isi_semua)
+    
+    $("td").filter(function(){
+      return $(this).html() == "0"
+    }).parent().addClass("sembunyi")
   })
   
   $(document).on("click", ".hapus", function(){

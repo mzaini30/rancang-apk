@@ -34,8 +34,6 @@ var tanggal = sekarang.getDate();
 var tahun = sekarang.getFullYear();
 var bulan = sekarang.getMonth();
 
-// tahun = 2025
-
 var list_bulan = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
 
 var bulan_tahun = list_bulan[bulan] + " " + tahun;
@@ -400,6 +398,10 @@ var olah_data = function olah_data() {
     $(".isi-genre").html(isi_genre);
 
     $(".isi-semua").html(isi_semua);
+
+    $("td").filter(function () {
+      return $(this).html() == "0";
+    }).parent().addClass("sembunyi");
   });
 
   $(document).on("click", ".hapus", function () {

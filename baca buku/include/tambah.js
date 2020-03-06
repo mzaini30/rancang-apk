@@ -6,7 +6,7 @@ $(".ke-tambah").click(() => $(".submit-tambah").click())
 })
 */
 
-var list_genre = JSON.parse(localStorage.genre)
+var list_genre = JSON.parse(localStorage.genre).sort()
 var pilihan_genre = ""
 for (var x of list_genre){
   pilihan_genre += `

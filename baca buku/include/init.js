@@ -5,8 +5,6 @@ var tanggal = sekarang.getDate()
 var tahun = sekarang.getFullYear()
 var bulan = sekarang.getMonth()
 
-// tahun = 2025
-
 var list_bulan = [
   "Januari",
   "Februari",
