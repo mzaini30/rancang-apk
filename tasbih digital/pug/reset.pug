@@ -1,0 +1,8 @@
+extends layout.pug
+
+block isi
+  h3 Reset?
+  p: .btn.btn-danger.reset Iya
+  
+block js
+  include:uglify-js:babel(presets=["es2015"]) reset.js

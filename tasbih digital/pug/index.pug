@@ -1,0 +1,19 @@
+extends layout.pug
+
+block isi
+  .canvas
+    h1.angka 0
+  
+block footer
+  .navbar.navbar-default.navbar-fixed-bottom
+    .container
+      table.table.table-bordered
+        tbody 
+          tr 
+            td: a.btn.btn-danger(href="reset.html") Reset
+            
+block style
+  include:uglify-css:stylus index.stylus
+  
+block js
+  include:uglify-js:babel(presets=["es2015"]) index.js
