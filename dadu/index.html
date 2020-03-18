@@ -1,0 +1,53 @@
+<!DOCTYPE html><html><head><title>Dadu</title><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css"><style> * {
+  word-wrap: break-word;
+}
+body {
+  padding-top: 50px;
+}
+.canvas {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+}
+h6 {
+  font-size: 40px;
+}
+h5 {
+  font-size: 55px;
+}
+h4 {
+  font-size: 70px;
+}
+h3 {
+  font-size: 85px;
+}
+h2 {
+  font-size: 100px;
+}
+h1 {
+  font-size: 115px;
+}
+</style></head><body><div class="navbar navbar-default navbar-fixed-top"><div class="container"><div class="navbar-header"><div class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu"><div class="icon-bar"></div><div class="icon-bar"></div><div class="icon-bar"></div></div><div class="navbar-brand">Dadu</div></div><div class="collapse navbar-collapse" id="menu"><ul class="nav navbar-nav"><li><a href="https://play.google.com/store/apps/details?id=com.mzaini30.dadu">Kasih bintang 5 </a></li><li><a href="https://play.google.com/store/apps/dev?id=5401138465689796048">Aplikasi lainnya</a></li></ul></div></div></div><div class="container"><div class="canvas"><div class="angka">1</div></div></div><script src="vendor/jquery.min.js"></script><script src="vendor/bootstrap/js/bootstrap.min.js"></script><script>"use strict";
+
+var buat_tengah = function buat_tengah() {
+  return $(".canvas").height($(window).height());
+};
+buat_tengah();
+$(window).resize(function () {
+  return buat_tengah();
+});
+var angka = [1, 2, 3, 4, 5, 6];
+var olah_angka = function olah_angka() {
+  var angkanya = angka[Math.floor(Math.random() * angka.length)];
+  var ukurannya = angka[Math.floor(Math.random() * angka.length)];
+  $(".angka").html("<h" + ukurannya + ">" + angkanya + "</h" + ukurannya + ">");
+};
+olah_angka();
+$(".canvas").click(function () {
+  return olah_angka();
+});
+$(".navbar-nav a").click(function () {
+  return $(".navbar-toggle").click();
+});</script></body></html>

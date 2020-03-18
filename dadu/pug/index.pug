@@ -1,0 +1,31 @@
+- judul = "Dadu"
+
+doctype html
+html
+  head
+    title Dadu
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1, user-scalable=no")
+    link(rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css")
+    style 
+      include:stylus style.stylus
+  body
+    .navbar.navbar-default.navbar-fixed-top
+      .container
+        .navbar-header
+          .navbar-toggle.collapsed(data-toggle="collapse" data-target="#menu")
+            .icon-bar
+            .icon-bar
+            .icon-bar
+          .navbar-brand #{judul}
+        .collapse.navbar-collapse#menu
+          ul.nav.navbar-nav
+            li: a(href=`https://play.google.com/store/apps/details?id=com.mzaini30.${judul.toLowerCase().replace(/ /g, "")}`) Kasih bintang 5 
+            li: a(href="https://play.google.com/store/apps/dev?id=5401138465689796048") Aplikasi lainnya
+    .container
+      .canvas
+        .angka 1
+    script(src="vendor/jquery.min.js")
+    script(src="vendor/bootstrap/js/bootstrap.min.js")
+    script
+      include:babel(presets=["es2015"]) app.js

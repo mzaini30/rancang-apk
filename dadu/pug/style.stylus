@@ -1,0 +1,22 @@
+*
+  word-wrap break-word
+body 
+  padding-top 50px
+.canvas
+  display flex 
+  align-items center
+  justify-content center
+  flex-direction column 
+  height 100%
+h6
+  font-size 40px
+h5
+  font-size 55px
+h4
+  font-size 70px
+h3
+  font-size 85px
+h2 
+  font-size 100px
+h1 
+  font-size 115px
