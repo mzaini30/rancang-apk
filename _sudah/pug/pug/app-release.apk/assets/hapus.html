@@ -1,0 +1,14 @@
+---
+layout: default
+---
+
+<p>Hapus kah?</p>
+<p><div class="btn btn-danger hapus">Iya</div></p>
+
+<script type="text/javascript">
+	$('.hapus').click(() => {
+		pug_playground.data.where({
+			id: Number(localStorage.id)
+		}).delete().then(() => location.href = 'index.html')
+	})
+</script>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Pug Playground</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="vendor/zen/style.css">
+	<script type="text/javascript" src="vendor/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="vendor/pug/pug.js"></script>
+	<script type="text/javascript" src="vendor/stylus/stylus.min.js"></script>
+	<script type="text/javascript" src="vendor/dexie/dexie.js"></script>
+	<script type="text/javascript" src="vendor/zen/app.js"></script>
+</head>
+<body>
+	<div class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<a href="index.html" class="navbar-brand">Pug Playground</a>
+			</div>
+		</div>
+	</div>
+	<div class="container"><style type="text/css">
+	body {
+		padding-bottom: 70px;
+	}
+</style>
+
+<form action="" class="form-tambahkan-kode">
+	<div class="form-group">
+		<input type="text" placeholder="Nama kode" class="form-control judul" required="">
+	</div>
+
+	<ul class="nav nav-tabs">
+		<li class="active"><a href="#pug-tab" data-toggle='tab'>Pug</a></li>
+		<li><a href="#stylus-tab" data-toggle='tab'>Stylus</a></li>
+		<li><a href="#jquery-tab" data-toggle='tab'>jQuery</a></li>
+		<li><a href="#hasil-tab" class="hasil-tab" data-toggle='tab'>Hasil</a></li>
+	</ul>
+
+	<div class="tab-content">
+		<div class="tab-pane active" id="pug-tab">
+			<div class="from-group">
+				<textarea name="" id="" cols="30" rows="10" class="form-control pug" wrap="off"></textarea>
+			</div>
+		</div>
+		<div class="tab-pane" id="stylus-tab">
+			<div class="from-group">
+				<textarea name="" id="" cols="30" rows="10" class="form-control stylus" wrap="off"></textarea>
+			</div>
+		</div>
+		<div class="tab-pane" id="jquery-tab">
+			<div class="from-group">
+				<textarea name="" id="" cols="30" rows="10" class="form-control jquery" wrap="off"></textarea>
+			</div>
+		</div>
+		<div class="tab-pane" id="hasil-tab">
+			<div class="error"></div>
+			<style type="text/css" class="style-hasil"></style>
+			<div class="html-hasil"></div>
+			<script type="text/javascript" class="javascript-hasil"></script>
+		</div>
+	</div>
+	<input type="submit" value="" class="submit-form sembunyi">
+</form>
+
+<div class="navbar navbar-default navbar-fixed-bottom">
+	<div class="container">
+		<table class="table table-bordered">
+			<tbody>
+				<tr>
+					<td>
+						<div class="btn btn-success oke">Oke</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<script type="text/javascript">
+	pug = require("pug")
+
+	$('.hasil-tab').click(() => {
+		try {
+			$('.html-hasil').html(pug.compile($('.pug').val()))
+			$('.style-hasil').html(stylus($('.stylus').val()).render())
+			// $('.javascript-hasil').html($('.jquery').val())
+			eval($('.jquery').val())
+		}
+		catch(error){
+			$('.error').html(`
+				<div class="alert alert-danger alert-dismissible">
+					<div class="close" data-dismiss='alert'>&times;</div>
+					${error}
+				</div>`)
+		}
+	})
+
+	$('.oke').click(() => $('.submit-form').click())
+	$('.form-tambahkan-kode').on('submit', x => {
+		x.preventDefault()
+		pug_playground.data.add({
+			judul: $('.judul').val(),
+			pug: $('.pug').val(),
+			stylus: $('.stylus').val(),
+			jquery: $('.jquery').val()
+		}).then(() => location.href = 'index.html')
+	})
+</script></div>
+</body>
+</html>
