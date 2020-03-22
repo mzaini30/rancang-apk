@@ -13,3 +13,17 @@ block isi
       .input-group
         input.form-control.kilo(type="tel")
         .input-group-addon kg
+    .form-group
+      label Harga per kilo? #[em (dalam ribuan)]
+      .input-group 
+        .input-group-addon Rp
+        input.form-control.harga(type="tel")
+        .input-group-addon 000
+    .form-group
+      label Total
+      .input-group 
+        .input-group-addon Rp 
+        input.form-control.total(readonly)
+        
+block js
+  include:uglify-js:babel(presets=["env"]) index.js
