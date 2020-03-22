@@ -1,0 +1,15 @@
+extends skeleton.pug
+
+block style
+  include:uglify-css:stylus index.stylus
+  
+block footer
+  | &nbsp;
+  
+block isi
+  form.form-timbangan
+    .form-group
+      label Berapa kilo?
+      .input-group
+        input.form-control.kilo(type="tel")
+        .input-group-addon kg

@@ -1,0 +1,42 @@
+- judul = "Judul Aplikasi"
+
+doctype html
+html
+  head
+    title #{judul}
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1, user-scalable=no")
+    link(rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css")
+    style 
+      include:uglify-css:stylus skeleton.stylus
+      block style
+  body
+    .navbar.navbar-default.navbar-fixed-top
+      .container
+        .navbar-header
+          .navbar-toggle.collapsed(data-toggle="collapse" data-target="#menu")
+            .icon-bar
+            .icon-bar
+            .icon-bar
+          .navbar-brand #{judul}
+        .collapse.navbar-collapse#menu
+          ul.nav.navbar-nav
+            li: a(href=`https://play.google.com/store/apps/details?id=com.mzaini30.${judul.toLowerCase().replace(/ /g, "")}`) Kasih bintang 5 
+            li: a(href="https://play.google.com/store/apps/dev?id=5401138465689796048") Aplikasi lainnya
+    .container
+      block isi
+        p Hello world
+    block footer
+      .navbar.navbar-default.navbar-fixed-bottom
+        .container
+          table.table.table-bordered
+            tbody
+              tr 
+                block menu
+                  td: .btn.btn-default Halo
+    script(src="vendor/jquery/jquery.min.js")
+    script(src="vendor/bootstrap/js/bootstrap.min.js")
+    script(src="vendor/dexie/dexie.js")
+    script
+      include:uglify-js:babel(presets=["env"]) skeleton.js
+      block js
