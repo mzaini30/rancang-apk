@@ -1,0 +1,24 @@
+extends post.pug
+
+block isi
+  :marked
+    # Menjalankan Pug JS
+    
+    Untuk menjalankan Pug JS, ada baiknya kita meletakkan file-file Pug di folder tertentu. Misalnya aja di folder `pug/`. Maka, kira-kira seperti ini hasilnya jika file-file Pug diolah:
+    
+    ```
+    pug/
+      index.pug 
+      tampil.pug 
+    index.html
+    tampil.html
+    ```
+    
+    Maka, berikut ini adalah kodenya:
+    
+    ```bash
+    cd pug 
+    pug . -w -o ..
+    ```
+    
+    `cd pug` artinya adalah kita masuk ke folder `pug/`. Lalu, di baris kedua, `pug` artinya adalah kita menjalankan program `pug`. `.` artinya adalah kita mengambil semua file `.pug` untuk diolah. `-w` artinya setiap ada perubahan pada file-file `pug/` maka akan langsung diolah. `-o` artinya output atau letak HTML-HTML kita yang sudah selesai. Di sini, aku menggunakan `..` yang artinya adalah output-output Pug yang berupa HTML itu, letaknya daerah sini.

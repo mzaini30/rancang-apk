@@ -1,0 +1,10 @@
+extends layout.pug
+
+mixin item(x)
+  a.list-group-item(href=`post_${x.toLowerCase().replace(/ /g, "-")}.html`) #{x}
+
+block isi
+  .list-group 
+    +item("Perkenalan")
+    +item("Instalasi Pug JS")
+    +item("Menjalankan Pug JS")
