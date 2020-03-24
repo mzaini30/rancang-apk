@@ -1,0 +1,5 @@
+.kiri 
+  text-align left
+  
+.sembunyi
+  display none

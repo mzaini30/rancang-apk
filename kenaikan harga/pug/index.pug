@@ -1,0 +1,27 @@
+extends skeleton.pug
+
+block isi
+  .form-group
+    label Berapa persen kenaikannya?
+    .input-group
+      input.form-control.persenan(type="tel")
+      .input-group-addon %
+  table.table.table-bordered
+    thead
+      tr 
+        th Harga awal
+        th Harga akhir
+        th 
+    tbody.data
+    
+block menu
+  td 
+    .btn.kiri Rp #[span.total 0]
+  td 
+    .btn.btn-default.tambah &plus;
+    
+block style
+  include:uglify-css:stylus index.stylus
+  
+block js
+  include:uglify-js:babel(presets=["env"]) index.js

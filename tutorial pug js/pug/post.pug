@@ -1,0 +1,10 @@
+extends layout.pug
+
+block append style
+  include:uglify-css:stylus post.stylus
+  
+block header
+  link(rel="stylesheet" href="vendor/prism/prism.css")
+  
+block bawah
+  script(src="vendor/prism/prism.js")
