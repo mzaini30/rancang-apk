@@ -1,0 +1,96 @@
+extends post.pug
+
+block isi
+	:marked
+		# Tambahan: Menggunakan Stylus
+
+		Nah, sekarang kita akan bermain dengan CSS. 
+
+		Kalau di CSS kan, misalnya kita ingin menambahkan style tertentu, maka kode CSSnya kan seperti ini:
+
+		```css
+		* {
+			word-wrap: break-word;
+		}
+
+		body {
+			padding-top: 70px;
+			padding-bottom: 20px;
+		}
+
+		img {
+			max-width: 100%;
+		}
+
+		.navbar-fixed-bottom .table {
+			margin-bottom: 0;
+		}
+
+		.navbar-fixed-bottom .btn {
+			width: 100%;
+		}
+
+		.navbar-fixed-bottom .table,
+		.navbar-fixed-bottom tr,
+		.navbar-fixed-bottom td {
+			border: none !important;
+		}
+		```
+
+		Ya, lumayan sih mengetikkannya. 
+
+		Nah, kalau mau lebih cepat dan nggak ngulang-ngulang kode yang sama (ketika memanggil selector), coba deh gunakan Stylus.
+
+		Kalau dengan Stylus, kode di atas menjadi:
+
+		```stylus
+		* 
+			word-wrap break-word
+
+		body 
+			padding-top 70px
+			padding-bottom 20px
+		
+
+		img 
+			max-width 100%
+		
+		.navbar-fixed-bottom
+			.table
+				margin-bottom 0
+				&
+				tr
+				td
+					border none !important
+			.btn
+				width 100%
+		```
+
+		Nah, bisa kita lihat kan, bahwa kode yang diketikkan menjadi lebih sedikit karena kita nggak menggunakan `:`, `;`, `{}` serta nggak melakukan pengulangan penulisan kode yang sama.
+
+		## Instalasi Stylus ke dalam Pug JS
+
+		Untuk instalasi, ketikkan kode berikut di Terminal:
+
+		```bash
+		npm install -g jstransformer-stylus
+		```
+
+		Lalu, untuk menggunakannya, kodenya seperti ini:
+
+		```pug
+		style
+			:stylus
+				body
+					padding-top 70px
+					padding-bottom 20px
+					img
+						max-width 100%
+		```
+
+		Atau, jika kita ingin menggunakan teknik `include`:
+
+		```pug
+		style
+			include:stylus style.stylus
+		```

@@ -1,10 +1,13 @@
 extends layout.pug
 
 mixin item(x)
-  a.list-group-item(href=`post_${x.toLowerCase().replace(/ /g, "-")}.html`) #{x}
+  a.list-group-item(href=`post_${x.toLowerCase().replace(/[^a-z0-9 ]/ig, '').replace(/ /g, "-")}.html`) #{x}
 
 block isi
   .list-group 
     +item("Perkenalan")
     +item("Instalasi Pug JS")
     +item("Menjalankan Pug JS")
+    +item("Template Dasar Pug")
+    +item("Tambahan: Menggunakan Stylus")
+    +item("Tambahan: Menggunakan Babel")

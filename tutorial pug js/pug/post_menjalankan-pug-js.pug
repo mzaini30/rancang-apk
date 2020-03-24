@@ -14,7 +14,7 @@ block isi
     tampil.html
     ```
     
-    Maka, berikut ini adalah kodenya:
+    Maka, berikut ini adalah kodenya yang harus dijalankan di Terminal, Command Prompt, atau Termux:
     
     ```bash
     cd pug 
@@ -22,3 +22,47 @@ block isi
     ```
     
     `cd pug` artinya adalah kita masuk ke folder `pug/`. Lalu, di baris kedua, `pug` artinya adalah kita menjalankan program `pug`. `.` artinya adalah kita mengambil semua file `.pug` untuk diolah. `-w` artinya setiap ada perubahan pada file-file `pug/` maka akan langsung diolah. `-o` artinya output atau letak HTML-HTML kita yang sudah selesai. Di sini, aku menggunakan `..` yang artinya adalah output-output Pug yang berupa HTML itu, letaknya daerah sini.
+
+    Contohnya saja, jika di dalam `pug/index.pug` berisi dengan kode di bawah ini:
+
+    ```pug
+    doctype html
+    html
+      head
+        title Hello world
+        meta(charset='utf-8')
+        meta(name='viewport' content='width=device-width, initial-scale=1, user-scalable=no')
+      body
+        h1 Hello world
+    ```
+
+    Maka, akan menghasilkan:
+
+    ```html
+    <!DOCTYPE html><html><head><title>Hello world</title><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"></head><body><h1>Hello world</h1></body></html>
+    ```
+
+    Namun, jika kita ingin membuat outputnya jadi prettify, atau hasilnya menjadi seperti ini:
+
+    ```html
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <title>Hello world</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+      </head>
+      <body>
+        <h1>Hello world</h1>
+      </body>
+    </html>
+    ```
+
+    Maka, kode yang harus dijalankan adalah:
+
+    ```bash
+    cd pug 
+    pug . -w -o .. -P
+    ```
+
+    Jadi, ditambahkan `-P` di akhirnya.

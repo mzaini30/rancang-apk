@@ -1,0 +1,42 @@
+extends post.pug
+
+block isi
+  :marked
+    # Template Dasar Pug
+
+    Berikut ini adalah template dasar Pug:
+
+    ```pug
+    doctype html
+    html
+      head
+        title Hello world
+        meta(charset='utf-8')
+        meta(name='viewport' content='width=device-width, initial-scale=1, user-scalable=no')
+      body
+        h1 Hello world
+    ```
+
+    Jika diolah, maka akan menjadi:
+
+    ```html
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <title>Hello world</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+      </head>
+      <body>
+        <h1>Hello world</h1>
+      </body>
+    </html>
+    ```
+
+    Pertama, kita menggunakan `doctype html` yang akan diolah menjadi `<!DOCTYPE html>`. Mengapa kita memulai dengan `doctype html`? Tentu saja supaya website yang kita buat itu menggunakan teknologi HTML 5.
+
+    Setelah itu, markup seperti biasa; `html`, `head`, dan `body`.
+
+    Lalu, di dalam `head`, ada `meta(charset='utf-8')` yang fungsinya adalah memberi tau browser bahwa kita menggunakan UTF-8 yang artinya, website kita itu menampung berbagai jenis tulisan termasuk tulisan huruf Arab, huruf Jepang, Korea, dan berbagai macam tulisan huruf lainnya. Jika ini nggak dicantumkan, maka browser hanya akan mendukung huruf latin.
+
+    Kemudian ada `meta(name='viewport' content='width=device-width, initial-scale=1, user-scalable=no')` yang fungsinya adalah supaya website yang kita buat itu ramah dengan perangkat mobile seperti Android, iPhone, iPad, dan lain sebagainya. Kalau nggak kita cantumkan ini, nanti kita menggunakannya harus zoom-zoom. Kan capek.
