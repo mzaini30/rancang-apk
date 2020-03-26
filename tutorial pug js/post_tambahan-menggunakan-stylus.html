@@ -2,55 +2,55 @@
 <p>Nah, sekarang kita akan bermain dengan CSS. </p>
 <p>Kalau di CSS kan, misalnya kita ingin menambahkan style tertentu, maka kode CSSnya kan seperti ini:</p>
 <pre><code class="lang-css">* {
-    word-wrap: break-word;
+  word-wrap: break-word;
 }
 
 body {
-    padding-top: 70px;
-    padding-bottom: 20px;
+  padding-top: 70px;
+  padding-bottom: 20px;
 }
 
 img {
-    max-width: 100%;
+  max-width: 100%;
 }
 
 .navbar-fixed-bottom .table {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 .navbar-fixed-bottom .btn {
-    width: 100%;
+  width: 100%;
 }
 
 .navbar-fixed-bottom .table,
 .navbar-fixed-bottom tr,
 .navbar-fixed-bottom td {
-    border: none !important;
+  border: none !important;
 }
 </code></pre>
 <p>Ya, lumayan sih mengetikkannya. </p>
 <p>Nah, kalau mau lebih cepat dan nggak ngulang-ngulang kode yang sama (ketika memanggil selector), coba deh gunakan Stylus.</p>
 <p>Kalau dengan Stylus, kode di atas menjadi:</p>
 <pre><code class="lang-stylus">* 
-    word-wrap break-word
+  word-wrap break-word
 
 body 
-    padding-top 70px
-    padding-bottom 20px
+  padding-top 70px
+  padding-bottom 20px
 
 
 img 
-    max-width 100%
+  max-width 100%
 
 .navbar-fixed-bottom
-    .table
-        margin-bottom 0
-        &amp;
-        tr
-        td
-            border none !important
-    .btn
-        width 100%
+  .table
+    margin-bottom 0
+    &amp;
+    tr
+    td
+      border none !important
+  .btn
+    width 100%
 </code></pre>
 <p>Nah, bisa kita lihat kan, bahwa kode yang diketikkan menjadi lebih sedikit karena kita nggak menggunakan <code>:</code>, <code>;</code>, <code>{}</code> serta nggak melakukan pengulangan penulisan kode yang sama.</p>
 <h2 id="instalasi-stylus-ke-dalam-pug-js">Instalasi Stylus ke dalam Pug JS</h2>
@@ -59,15 +59,15 @@ img
 </code></pre>
 <p>Lalu, untuk menggunakannya, kodenya seperti ini:</p>
 <pre><code class="lang-pug">style
-    :stylus
-        body
-            padding-top 70px
-            padding-bottom 20px
-            img
-                max-width 100%
+  :stylus
+    body
+      padding-top 70px
+      padding-bottom 20px
+      img
+        max-width 100%
 </code></pre>
 <p>Atau, jika kita ingin menggunakan teknik <code>include</code>:</p>
 <pre><code class="lang-pug">style
-    include:stylus style.stylus
+  include:stylus style.stylus
 </code></pre>
 </div>&nbsp;<script src="vendor/jquery/jquery.min.js"></script><script src="vendor/bootstrap/js/bootstrap.min.js"></script><script src="vendor/dexie/dexie.js"></script><script src="vendor/vconsole/vconsole.min.js"></script><script src="vendor/prism/prism.js"></script><script>"use strict";$(".navbar-nav a").click(function(){return $(".navbar-toggle").click()});</script></body></html>

@@ -1,0 +1,43 @@
+extends post.pug
+
+block isi
+  :marked
+    # Tambahan: Menggunakan Babel
+    
+    Kehadiran Ecmascript 2015 ke atas memudahkan kita dalam menulis sintaks-sintaks Javascript. Misalnya saja seperti kode di bawah ini:
+    
+    ```javascript 
+    const pangkat = (x, y) => x ** y 
+    console.log(pangkat(2, 3))
+    // hasilnya 8
+    ```
+    
+    Namun sayangnya untuk browser-browser lawas, kode ini nggak bisa dijalankan. Maka, kita memerlukan Babel untuk mengolahnya menjadi kode yang ramah untuk browser lawas:
+    
+    ```javascript 
+    "use strict";
+
+    var pangkat = function pangkat(x, y) {
+      return Math.pow(x, y);
+    };
+    console.log(pangkat(2, 3));
+    // hasilnya 8
+    ```
+    
+    ## Install Babel 
+    
+    Jalankan kode berikut di Terminal:
+    
+    ```bash
+    npm install -g jstransformer-babel babel-preset-env
+    ```
+    
+    Kemudian kode Pugnya adalah:
+    
+    ```pug 
+    script 
+      :babel(presets=["env"])
+        const pangkat = (x, y) => x ** y 
+        console.log(pangkat(2, 3))
+        // hasilnya 8
+    ```

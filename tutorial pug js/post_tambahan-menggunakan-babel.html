@@ -1,0 +1,27 @@
+<!DOCTYPE html><html><head><title>Tutorial Pug JS</title><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css"><style> *{word-wrap:break-word}body{padding-top:70px;padding-bottom:50px}img{max-width:100%}.navbar-fixed-bottom .btn{width:100%}.navbar-fixed-bottom .table{margin-bottom:0}.navbar-fixed-bottom .table,.navbar-fixed-bottom .table td,.navbar-fixed-bottom .table tr{border:none!important}body{padding-bottom:0}body{padding-top:50px}</style><link rel="stylesheet" href="vendor/prism/prism.css"></head><body><div class="navbar navbar-default navbar-fixed-top"><div class="container"><div class="navbar-header"><div class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu"><div class="icon-bar"></div><div class="icon-bar"></div><div class="icon-bar"></div></div><a class="navbar-brand" href="index.html">Tutorial Pug JS</a></div><div class="collapse navbar-collapse" id="menu"><ul class="nav navbar-nav"><li><a href="https://play.google.com/store/apps/details?id=com.mzaini30.tutorialpugjs">Kasih bintang 5 </a></li><li><a href="https://play.google.com/store/apps/dev?id=5401138465689796048">Aplikasi lainnya</a></li></ul></div></div></div><div class="container"><h1 id="tambahan-menggunakan-babel">Tambahan: Menggunakan Babel</h1>
+<p>Kehadiran Ecmascript 2015 ke atas memudahkan kita dalam menulis sintaks-sintaks Javascript. Misalnya saja seperti kode di bawah ini:</p>
+<pre><code class="lang-javascript">const pangkat = (x, y) =&gt; x ** y 
+console.log(pangkat(2, 3))
+// hasilnya 8
+</code></pre>
+<p>Namun sayangnya untuk browser-browser lawas, kode ini nggak bisa dijalankan. Maka, kita memerlukan Babel untuk mengolahnya menjadi kode yang ramah untuk browser lawas:</p>
+<pre><code class="lang-javascript">&quot;use strict&quot;;
+
+var pangkat = function pangkat(x, y) {
+  return Math.pow(x, y);
+};
+console.log(pangkat(2, 3));
+// hasilnya 8
+</code></pre>
+<h2 id="install-babel">Install Babel</h2>
+<p>Jalankan kode berikut di Terminal:</p>
+<pre><code class="lang-bash">npm install -g jstransformer-babel babel-preset-env
+</code></pre>
+<p>Kemudian kode Pugnya adalah:</p>
+<pre><code class="lang-pug">script 
+  :babel(presets=[&quot;env&quot;])
+    const pangkat = (x, y) =&gt; x ** y 
+    console.log(pangkat(2, 3))
+    // hasilnya 8
+</code></pre>
+</div>&nbsp;<script src="vendor/jquery/jquery.min.js"></script><script src="vendor/bootstrap/js/bootstrap.min.js"></script><script src="vendor/dexie/dexie.js"></script><script src="vendor/vconsole/vconsole.min.js"></script><script src="vendor/prism/prism.js"></script><script>"use strict";$(".navbar-nav a").click(function(){return $(".navbar-toggle").click()});</script></body></html>
